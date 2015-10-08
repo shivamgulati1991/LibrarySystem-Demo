@@ -1,0 +1,20 @@
+<h2> Add a new book suggestion</h2>
+<%= form_for @suggestion do |f| %>
+
+  <p>
+    <%= f.label :Author %><br>
+    <%= f.text_field :author %>
+  </p>
+   <p>
+    <%= f.label :Description %><br>
+    <%= f.text_area :description %>
+  </p>
+   <p>
+    <%= f.label :Title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.submit :"Save" %>
+  </p>
+<% end %>

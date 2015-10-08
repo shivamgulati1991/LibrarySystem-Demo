@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lib</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="header">
+<h1>Library Management</h1>
+</div>
+<div id="nav">
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+<%= link_to 'User management', controller: 'users' %><br>
+<%= link_to 'Manage Books', controller: 'books' %><br>
+<% else %>
+<%= link_to 'Book checkout/return', controller: 'books' %><br>
+
+<% end %>
+<%= link_to 'Book suggestions', controller: 'suggestions' %><br>
+<%= link_to 'Checkout history', controller: 'histories' %><br>
+<%= link_to "Update Profile", edit_user_path(current_user) %><br>
+
+
+<%= link_to "Logout", logout_path, method: "delete" %><br>
+
+</div>
+<%= yield %>
+<div id="footer">
+Developed by Matrika, Samrudhi, Shivam
+</div>
+  </div>
+
+</body>
+</html>

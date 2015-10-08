@@ -1,0 +1,55 @@
+<h2>Book list and Search</h2>
+   <%= form_tag books_path, :method => 'get' do %>
+   <p style="padding-left: 5cm;">
+    Enter ISBN, Author name, Description, Title or Status<br>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search" %>
+  </p>
+  <% end %>
+<table border ="1" cellpadding="10">
+  <tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Description</th>
+
+    <th>Status</th>
+    <th colspan="5">Operations</th>
+  </tr>
+ 
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.ISBN %></td>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.description %></td>
+	  
+      <td><%= book.status %></td>
+      <td><%= link_to 'Show', book_path(book) %></td>
+      <% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>    
+	
+		      <% if book.status == "Available" %>
+		      <td><%= link_to 'Delete', book_path(book),
+			      method: :delete,
+			      data: { confirm: 'Are you sure?' } %></td>
+			<% else %>
+			<td> This book is checked out </td>
+			<% end %>
+	<% end %>
+	<% if book.status == "Available"%>
+        <td><%= link_to 'Checkout', checkout_book_path(book) %></td>
+	<% end %>
+        <% if book.status == "Checked Out" && (session[:user_usertype] == 0 or session[:user_usertype] == 1 or session[:user_email]==book.email) %>
+        <td><%= link_to 'Return', checkout_book_path(book) %></td>
+	<% end %>
+	<% if book.status == "Checked Out" && session[:user_usertype] == 2 %>
+	<td><%= link_to 'Request Book', mail_book_path(book) %></td>
+	<% end %>
+    </tr>
+  <% end %>
+</table>
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+	<br/></br>
+	<%= link_to 'New book', new_book_path, :class=>"buttonDesign" %>
+<% end %>

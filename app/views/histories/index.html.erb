@@ -1,0 +1,53 @@
+<h2>Checkout history</h2>
+   <%= form_tag histories_path, :method => 'get' do %>
+   <p style="padding-left: 5cm;">
+    Enter member name, email, ISBN, Title or Status<br>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search" %>
+  </p>
+  <% end %>
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th>Issue/return date</th>
+
+  </tr>
+ 
+  <% @histories.each do |history| %>
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+    <tr>
+      <td><%= history.name %></td>
+    <td><%= history.email %></td>
+    <td><%= history.ISBN %></td>
+    <td><%= history.title %></td>
+    <td><%= history.author %></td>
+    <td><%= history.description %></td>
+    <td><%= history.status %></td>
+    <td><%= history.created_at %></td>
+    </tr>
+
+<% else %>
+<% if history.email == session[:user_email] %>
+    <tr>
+      <td><%= history.name %></td>
+    <td><%= history.email %></td>
+    <td><%= history.ISBN %></td>
+    <td><%= history.title %></td>
+    <td><%= history.author %></td>
+    <td><%= history.description %></td>
+    <td><%= history.status %></td>
+    <td><%= history.created_at %></td>
+    </tr>
+  <% end %>
+
+  <% end %>
+<% end %>
+</table>
+
+<br/></br>

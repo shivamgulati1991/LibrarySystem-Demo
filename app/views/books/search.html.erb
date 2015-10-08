@@ -1,0 +1,27 @@
+<h4> Search books</h4>
+<%= form_for @book do |f| %>
+  <p>
+    <%= f.label :ISBN %><br>
+    <%= f.text_field :ISBN %>
+  </p>
+ 
+  <p>
+    <%= f.label :Author %><br>
+    <%= f.text_field :author %>
+  </p>
+   <p>
+    <%= f.label :Description %><br>
+    <%= f.text_area :description %>
+  </p>
+   <p>
+    <%= f.label :Title %><br>
+    <%= f.text_field :title %>
+  </p>
+   <p>
+    <%= f.label :Status %><br> 
+    <%= f.select :status, [['Available','Available'],['Checked Out','Checked Out']] %>
+  </p>
+  <p>
+    <%= f.submit :"Search" %>
+  </p>
+<% end %>

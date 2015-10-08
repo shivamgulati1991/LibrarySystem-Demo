@@ -1,0 +1,52 @@
+<h2> Book checkout and return </h2>
+<% if session[:user_usertype] == 2 %>
+<%= form_for :book, :url => { :action => "checkoutupdate" }, :html => { :method => :post }  do |f| %>
+
+ <p>
+    <%= f.label :ISBN %><br>
+    <%= f.text_field :ISBN, :disabled=>true %>
+  </p>
+ 
+  <p>
+    <%= f.label :Author %><br>
+    <%= f.text_field :author, :disabled=>true %>
+  </p>
+   <p>
+    <%= f.label :Description %><br>
+    <%= f.text_area :description, :disabled=>true %>
+  </p>
+   <p>
+    <%= f.label :Title %><br>
+    <%= f.text_field :title, :disabled=>true %>
+  </p>
+   <p>
+    <%= f.label :"Action" %><br>
+      <% if @book.status == "Checked Out" %>
+      <%= f.select :status, [['Return','Available']] %>
+  <% elsif @book.status == "Available" %>
+  <%= f.select :status, [['Check out','Checked Out']] %>
+  <% end %>
+    <%#= f.select :status, [['Return','Available'],['Check out','Checked Out']] %>
+  </p>
+  <p>
+  <%#= f.select("uname", "ISBN", Book.all.collect {|u| [ u.title, u.ISBN ] }, { include_blank: true }) %>
+  </p>
+  <p>
+
+   <%= f.submit :"Proceed" %>
+  </p>
+<% end %>
+<% elsif session[:user_usertype] == 0 or1session[:user_usertype] == 1 %>
+
+	<%= form_tag :url => { :action => "checkoutUserupdate" }, :html => { :method => :post } do %>
+		<%= email_field_tag 'Name' %>
+		<%= submit_tag "Proceed" %>
+	<% end %>
+	<div class="container">
+      		<% flash.each do |key, value| %>
+        	<div class="alert alert-<%= key %>"><%= value %></div>
+      		<% end %>
+      		<%= yield %>
+    	</div>
+<% end %>
+<%= link_to 'Back', books_path %>

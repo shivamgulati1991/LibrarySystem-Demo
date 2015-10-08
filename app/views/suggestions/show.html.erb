@@ -1,0 +1,21 @@
+<h2>Suggested book detail you just provided</h2>
+<div style="padding-left: 5cm;">
+ 
+<p>
+  <strong>Author:</strong>
+  <%= @suggestion.author %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @suggestion.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @suggestion.description %>
+</p>
+
+</div>
+
+<%= link_to 'Back', suggestions_path %>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<html>
+<head>
+  <title>Library Management System</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+   <!--[if lt IE 9]>
+	   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+	    </script>
+    <![endif]-->
+</head>
+<body>
+<h1><center>LibSys</center></h1>
+<h2>
+  <center>Welcome to the Library management system.</center>
+<br><br><br><br>
+</h2>
+ <header class="">
+      <div class="container">
+        <nav><center>
+          <ul class="">
+            <% if logged_in? %>
+          <!--<li><%= link_to "Users", '#' %></li>-->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              You are already logged in. <%= link_to "Click here to proceed", current_user %>
+            </ul>
+          </li>
+        <% else %>
+          <h3>Already a user?<%= link_to "Log in", login_path %></h3>
+        <% end %>
+          </ul>
+        </center></nav>
+      </div>
+    </header>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <center><b><div class="alert alert-<%= message_type %>"><%= message %></div></b></center>
+      <% end %>
+	<div id="main">
+
+	<%= yield %>  
+	</div>      
+    </div>
+<div id="note">
+"I must say I find television very educational. The minute somebody turns it on, I go to the library and read a good book." ~ Groucho Marx
+<br><br>
+</div>
+<div id="footer">
+Developed by Matrika, Samrudhi, Shivam
+</div>
+  </body>
+</html>

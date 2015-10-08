@@ -1,0 +1,38 @@
+<h2>Book list suggestion</h2>
+   <%= form_tag suggestions_path, :method => 'get' do %>
+
+  <% end %>
+<table border ="1" cellpadding="10">
+  <tr>
+
+    <th>Title</th>
+    <th>Author</th>
+    <th>Description</th>
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+    <th>Add to Library</th>
+    <th>Delete suggestion</th>
+<% end %>
+  </tr>
+ 
+  <% @suggestions.each do |suggestion| %>
+    <tr>
+
+      <td><%= suggestion.title %></td>
+      <td><%= suggestion.author %></td>
+      <td><%= suggestion.description %></td>
+
+	<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+	<td><%= link_to 'Edit', edit_suggestion_path(suggestion) %></td>  
+      <td><%= link_to 'Delete', suggestion_path(suggestion),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
+	</td>
+    </tr>
+
+  <% end %>
+</table>
+	<br/></br>
+<% if (session[:user_usertype]==2) %>
+	<%= link_to 'New suggestion', new_suggestion_path, :class=>"buttonDesign" %>
+<% end %>

@@ -1,0 +1,47 @@
+<h2>Users list</h2>
+<table border ="1" cellpadding="10">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>User Type</th>
+    <th>Book checked out?</th>
+    <th colspan="3">Operations</th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
+      <% if user.usertype == 0 %>
+        <td>Super admin</td>
+      <% elsif user.usertype == 1 %>
+        <td>Admin</td>
+      <% elsif user.usertype == 2 %>
+        <td>Library member</td>
+      <% end %>
+      <td><%= user.check %></td>
+      <td><%= link_to 'Edit', role_user_path(user) %></td>
+	<% if user.email != "superadmin@ncsu.edu" and user.email != session[:user_email] %>
+      <% if user.check != true %>
+      <td><%= link_to 'Delete', user_path(user),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+	<% else %>
+	<td> This user has a checked out book </td>
+	<% end %>
+      <td><%= link_to 'Assign/Revoke Admin', makeadmin_user_path(user),
+              method: :makeadmin,
+              data: { confirm: 'Are you sure you want to change this user role?' } %></td>
+<% else %>
+<td>You can't delete this user</td>
+<td>Already an admin</td>
+  	<% end %>
+    </tr>
+
+  <% end %>
+</table>
+<br>
+User roles:<br>
+0 SuperAdmin<br>
+1 Admin <br>
+2 Library member

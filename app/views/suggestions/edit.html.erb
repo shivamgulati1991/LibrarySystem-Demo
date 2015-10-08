@@ -1,0 +1,30 @@
+<h2> Edit suggestions</h2>
+
+<h2> Add a suggested book to library</h2>
+<%= form_for @suggestion do |f| %>
+
+  <p>
+    <%= f.label :Author %><br>
+    <%= f.text_field :author %>
+  </p>
+   <p>
+    <%= f.label :Description %><br>
+    <%= f.text_area :description %>
+  </p>
+   <p>
+    <%= f.label :Title %><br>
+    <%= f.text_field :title %>
+  </p>
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+  <p>
+    <%= f.label :ISBN %><br>
+    <%= f.text_field :ISBN %>
+  </p>
+  <p>
+    <%= f.label :Status %><br>
+    <%= f.text_field :status, :value => "Available" %>
+  <p>
+<% end %>
+    <%= f.submit :"Save" %>
+  </p>
+<% end %>
