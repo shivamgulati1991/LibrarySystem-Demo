@@ -40,7 +40,7 @@
 	<% if book.status == "Available"%>
         <td><%= link_to 'Checkout', checkout_book_path(book) %></td>
 	<% end %>
-        <% if book.status == "Checked Out" && (session[:user_usertype] == 0 or session[:user_usertype] == 1 or session[:user_email]==book.email %>
+        <% if book.status == "Checked Out" && (session[:user_usertype] == 0 or session[:user_usertype] == 1 or session[:user_email]==book.email) %>
         <td><%= link_to 'Return', checkout_book_path(book) %></td>
 	<% end %>
 	<% if book.status == "Checked Out" && session[:user_usertype] == 2 %>
