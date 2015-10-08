@@ -1,7 +1,7 @@
 <h2>Checkout history</h2>
    <%= form_tag histories_path, :method => 'get' do %>
    <p style="padding-left: 5cm;">
-    Enter member name, email, Title or Status<br>
+    Enter member name, email, ISBN, Title or Status<br>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search" %>
   </p>
