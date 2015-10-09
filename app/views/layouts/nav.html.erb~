@@ -19,7 +19,7 @@
 
 <% end %>
 <%= link_to 'Book suggestions', controller: 'suggestions' %><br>
-<%= link_to 'User Checkout history', controller: 'histories' %><br>
+<%= link_to 'Checkout history', controller: 'histories' %><br>
 <%= link_to "Update Profile", edit_user_path(current_user) %><br>
 
 
