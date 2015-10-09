@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       log_in @user
       ActiveRecord::Base.transaction do
         @user.update_attributes(:usertype=>2, :check=> 0)
+        session[:user_usertype] = @user.usertype
       end
       flash[:success] = "Welcome to LibSys!"
       redirect_to @user
