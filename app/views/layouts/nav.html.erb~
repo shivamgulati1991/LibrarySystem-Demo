@@ -12,14 +12,18 @@
 </div>
 <div id="nav">
 <% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
-<%= link_to 'User management', controller: 'users' %><br>
-<%= link_to 'Manage Books', controller: 'books' %><br>
+	<%= link_to 'User management', controller: 'users' %><br>
+	<%= link_to 'Manage Books', controller: 'books' %><br>
 <% else %>
 <%= link_to 'Book checkout/return', controller: 'books' %><br>
 
 <% end %>
 <%= link_to 'Book suggestions', controller: 'suggestions' %><br>
-<%= link_to 'Checkout history', controller: 'histories' %><br>
+<% if (session[:user_usertype]==1 ||session[:user_usertype]==0) %>
+	<%= link_to 'Users/books Checkout history', controller: 'histories' %><br>
+<% else %>
+	<%= link_to 'User Checkout history', controller: 'histories' %><br>
+<% end %>
 <%= link_to "Update Profile", edit_user_path(current_user) %><br>
 
 
